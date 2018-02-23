@@ -1,0 +1,8 @@
+- hosts: localhost
+  tasks:
+  - name: Simple PUT operation
+    aws_s3:
+      bucket: orlando-bucket
+      object: uploads/sample2.txt
+      src: uploads/sample2.txt
+      mode: put
