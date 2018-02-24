@@ -1,8 +1,27 @@
 - hosts: localhost
+  vars:
+    my_bucket_name: orlando-foo-bucket
+
   tasks:
+  - name: List buckets
+    aws_s3_bucket_facts:
+    register: s3_buckets
+  
+  - debug:
+      msg: "Buckets: {{ s3_buckets }}"
+
+  - name: Create an empty bucket
+    aws_s3:
+      bucket: "{{ my_bucket_name }}"
+      mode: create
+      permission: private
+
   - name: Simple PUT operation
     aws_s3:
-      bucket: orlando-bucket
+      bucket: "{{ my_bucket_name }}"
       object: uploads/sample2.txt
       src: uploads/sample2.txt
       mode: put
+
+
+
