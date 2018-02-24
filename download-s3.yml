@@ -1,0 +1,23 @@
+---
+- hosts: localhost
+  connection: local
+  gather_facts: False
+  vars:
+    my_bucket_name: orlando-ansible-bucket
+    my_directory_name: downloads
+
+  tasks:
+
+  - name: Creates directory if it does not exist
+    file: 
+      path: "{{ my_directory_name }}"
+      state: directory
+      mode: 0755
+
+  - name: Download files
+    aws_s3:
+      bucket: "{{ my_bucket_name }}"
+      object: "{{ my_directory_name }}/grumpy.jpg"
+      dest: "{{ my_directory_name }}/grumpy.jpg"
+      overwrite: always
+      mode: get
