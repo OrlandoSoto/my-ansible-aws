@@ -1,6 +1,6 @@
 - hosts: localhost
   vars:
-    my_bucket_name: orlando-foo-bucket
+    my_bucket_name: orlando-new-bucket
 
   tasks:
   - name: List buckets
@@ -16,12 +16,15 @@
       mode: create
       permission: private
 
-  - name: Simple PUT operation
+  - name: Upload files
     aws_s3:
       bucket: "{{ my_bucket_name }}"
       object: uploads/sample2.txt
       src: uploads/sample2.txt
       mode: put
 
-
-
+  - name: Sync directory
+    s3_sync:
+      bucket: '{{ my_bucket_name }}'
+      file_root: uploads/
+      key_prefix: uploads
