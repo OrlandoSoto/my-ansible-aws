@@ -1,0 +1,19 @@
+---
+- hosts: localhost
+  connection: local
+  gather_facts: False
+  vars:
+    my_bucket_name: orlando-ansible-bucket
+
+  tasks:
+  - name: Delete bucket
+    aws_s3:
+      bucket: "{{ my_bucket_name }}"
+      mode: delete
+
+  - name: List buckets
+    aws_s3_bucket_facts:
+    register: s3_buckets
+  
+  - debug:
+      msg: "Buckets: {{ s3_buckets }}"

@@ -1,6 +1,9 @@
+---
 - hosts: localhost
+  connection: local
+  gather_facts: False
   vars:
-    my_bucket_name: orlando-new-bucket
+    my_bucket_name: orlando-ansible-bucket
 
   tasks:
   - name: List buckets
@@ -21,10 +24,22 @@
       bucket: "{{ my_bucket_name }}"
       object: uploads/sample2.txt
       src: uploads/sample2.txt
+      overwrite: different
       mode: put
 
-  - name: Sync directory
+  - name: Sync uploads directory
     s3_sync:
       bucket: '{{ my_bucket_name }}'
       file_root: uploads/
       key_prefix: uploads
+      file_change_strategy: date_size
+      include: "*.txt"
+      delete: True
+
+  - name: Sync Downloads directory
+    s3_sync:
+      bucket: '{{ my_bucket_name }}'
+      file_root: uploads/
+      key_prefix: downloads
+      file_change_strategy: date_size
+      include: "*.jpg"
