@@ -1,0 +1,15 @@
+---
+- hosts: localhost
+  connection: local
+  gather_facts: False
+  vars:
+    my_bucket_name: orlando-ansible-bucket
+
+  tasks:
+  - ec2_instance_facts:
+    filters:
+      "tag:Name": orlando-ansible
+    register: my_list
+
+  - debug:
+      msg: "Instances: {{ my_list['instances']['root_device_type'] }}"

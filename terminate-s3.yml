@@ -1,0 +1,16 @@
+---
+- hosts: localhost
+  connection: local
+  gather_facts: False
+  vars:
+    region: us-east-2
+    instance_ids:
+      - 'i-03b15dcebf9b55de7'
+      - 'i-08e0543792a141426'
+
+  tasks:
+  - name: Terminate instance 
+    ec2:
+      instance_ids: '{{ instance_ids }}'
+      state: 'absent'
+      region: '{{ region }}'
