@@ -3,7 +3,7 @@
   connection: local
   gather_facts: False
   vars:
-    my_bucket_name: orlando-ansible-bucket
+    my_tag_name: orlando-ansible
 
   tasks:
   - ec2_instance_facts:

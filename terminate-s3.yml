@@ -5,7 +5,7 @@
   vars:
     region: us-east-2
     instance_ids:
-      - 'i-03b15dcebf9b55de7'
+      - 'i-0b2ff55e7dd974f2c'
       - 'i-08e0543792a141426'
 
   tasks:

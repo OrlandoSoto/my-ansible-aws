@@ -3,7 +3,8 @@
   connection: local
   gather_facts: False
   vars:
-    my_bucket_name: orlando-ansible-bucket
+    region: us-east-2
+    my_instance_name: orlando-ansible
 
   tasks:
   - name: Create EC2 instance
@@ -14,9 +15,9 @@
       wait: yes
       count: 1
       vpc_subnet_id: subnet-4a6ef131
-      region: us-east-2
+      region: '{{ region }}'
       instance_tags:
-        Name: orlando-ansible
+        Name: '{{ my_instance_name }}'
 
   - ec2_instance_facts:
     filters:
