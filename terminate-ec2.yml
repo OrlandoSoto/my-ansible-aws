@@ -6,7 +6,7 @@
     region: us-east-2
     instance_ids:
       - 'i-0b2ff55e7dd974f2c'
-      - 'i-08e0543792a141426'
+      - 'i-08cb8cc99383e231e'
 
   tasks:
   - name: Terminate instance 
